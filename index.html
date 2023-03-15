@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prueba JS y HTML</title>
+	<style>
+		table {
+			border-spacing: 0 10px;
+		}
+		td {
+			border-width: 1px;
+			padding: 5px;
+		}
+		th {
+			border-width: 1px;
+			padding: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Números</h1>
+    <div id="numeros"></div>
+    <script>
+        let numeros = [];
+        for(i = 100; i < 150; i++){
+            if(i % 2 !== 0){
+                numeros.push(" " + i)
+            }
+        }
+        document.getElementById("numeros").innerHTML = `Los números impares, mayores a 100 y menores a 150 son: ${numeros}`;
+    </script>
+	<hr>
+    <h1>Operaciones simples</h1>
+    <div>
+        <p>El primero input se operara sobre el segundo es decir 1 + 2 = 3</p>
+        <input type="number" onchange="change(event)" id="one" placeholder="Este es el input uno">
+        <input type="number" onchange="change(event)" id="two" placeholder="Este es el input dos">
+        <button id="suma" onclick="op(event)">Suma</button>
+        <button id="resta" onclick="op(event)">Resta</button>
+        <button id="multiplica" onclick="op(event)">Multiplica</button>
+        <button id="divide" onclick="op(event)">Divide</button>
+      </div>
+      <div id="operacion"></div>
+      <script>
+        let operacion = "";
+        let resultado = 0;
+        let inputOne = 0;
+        let inputTwo = 0;
+      
+        function change(event) {
+          if (event.target.id === "one") inputOne = event.target.value;
+          else if (event.target.id === "two") inputTwo = event.target.value;
+        }
+      
+        function op(event) {
+          switch (event.target.id) {
+            case "resta":
+              resultado = inputOne - inputTwo;
+              break;
+            case "multiplica":
+              resultado = inputOne * inputTwo;
+              break;
+            case "divide":
+              resultado = inputOne / inputTwo;
+              break;
+            default:
+              resultado = parseFloat(inputOne) + parseFloat(inputTwo);
+              break;
+          }
+          operacion = event.target.id;
+          document.getElementById("operacion").innerHTML = `El resultado de la operacion ${operacion} es: ${resultado}`;
+        }
+      
+      </script>      
+	<hr>
+	<h1>Carros</h1>
+    <div id="carros" ></div>
+    <script>
+        let vehiculo = [{"color": "rojo","marca": "bmw","capacidad": 11},{"color": "azul","marca": "fiat","capacidad": 2},{"color": "negro","marca": "hyundai","capacidad": 6},{"color": "amarillo","marca": "jeep","capacidad": 15},{"color": "azul","marca": "citroen","capacidad": 20},{"color": "azul","marca": "renault","capacidad": 12},{"color": "rojo","marca": "ford","capacidad": 4},{"color": "gris","marca": "toyota","capacidad": 8}];
+        let table = document.createElement('table');
+        table.setAttribute("border", "1");
+        table.style.border = "1px solid black";
+        let thead = table.createTHead();
+        let row = thead.insertRow();
+        let headers = ["Color", "Marca", "Capacidad"];
+        for (let i = 0; i < headers.length; i++) {
+            let th = document.createElement('th');
+            let text = document.createTextNode(headers[i]);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
+
+        let tbody = table.createTBody();
+        for (let i = 0; i < vehiculo.length; i++) {
+            let row = tbody.insertRow();
+            let cell1 = row.insertCell();
+            let text1 = document.createTextNode(vehiculo[i].color);
+            cell1.appendChild(text1);
+            let cell2 = row.insertCell();
+            let text2 = document.createTextNode(vehiculo[i].marca);
+            cell2.appendChild(text2);
+            let cell3 = row.insertCell();
+            let text3 = document.createTextNode(vehiculo[i].capacidad);
+            cell3.appendChild(text3);
+        }
+
+        document.body.appendChild(table);
+    </script>
+    <hr>
+    <h2>Los vehículos que tienen una capacidad mayor a 10 y tienen color azul son:</h2>
+    <script>
+        let vehiculoFilter = vehiculo.filter((element) => element.capacidad > 10 && element.color === "azul");
+        let tableFilter = document.createElement('table');
+        tableFilter.setAttribute("border", "1");
+        tableFilter.style.border = "1px solid black";
+        let theadFilter = tableFilter.createTHead();
+        let rowFilter = theadFilter.insertRow();
+        let headersFilter = ["Color", "Marca", "Capacidad"];
+        for (let i = 0; i < headersFilter.length; i++) {
+            let th = document.createElement('th');
+            let text = document.createTextNode(headersFilter[i]);
+            th.appendChild(text);
+            rowFilter.appendChild(th);
+        }
+
+        let tbodyFilter = tableFilter.createTBody();
+        for (let i = 0; i < vehiculoFilter.length; i++) {
+            let row = tbodyFilter.insertRow();
+            let cell1 = row.insertCell();
+            let text1 = document.createTextNode(vehiculoFilter[i].color);
+            cell1.appendChild(text1);
+            let cell2 = row.insertCell();
+            let text2 = document.createTextNode(vehiculoFilter[i].marca);
+            cell2.appendChild(text2);
+            let cell3 = row.insertCell();
+            let text3 = document.createTextNode(vehiculoFilter[i].capacidad);
+            cell3.appendChild(text3);
+        }
+
+        document.body.appendChild(tableFilter);
+    </script>
+</body>
+</html>
